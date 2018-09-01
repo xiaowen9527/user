@@ -21,38 +21,45 @@
 export default {
   name: "login",
   data() {
-      return {
-          username:'',
-          password:''
-      }
+    return {
+      username: "",
+      password: ""
+    };
   },
   methods: {
-      goLogin(){
-          if(this.username.length===0){
-              alert('请输入帐号')
-              return false
-          }else if(this.password.length===0){
-              alert('请输入密码')
-          }
-
-        this.$http.post('',{
-            username:this.username,
-            password:this.password
-        })
-            .then(res=>{
-
-                
-                alert('登录成功')
-                this.$router.push('/admin')
-            })
-            .catch(err=>{
-                alert(err)
-            })
-    
-      },
-      goRegister(){
-          this.$router.push('/register')
+    goLogin() {
+      if (this.username.length === 0) {
+        alert("请输入帐号");
+        return false;
+      } else if (this.password.length === 0) {
+        alert("请输入密码");
       }
+      let params = {
+        username: this.username,
+        password: this.password
+      };
+
+      this.$store.commit("getadmin", params);
+
+      alert("登录成功");
+      this.$router.push("/admin");
+
+      // this.$http.post('',{
+      //     username:this.username,
+      //     password:this.password
+      // })
+      //     .then(res=>{
+
+      //         alert('登录成功')
+      //         this.$router.push('/admin')
+      //     })
+      //     .catch(err=>{
+      //         alert(err)
+      //     })
+    },
+    goRegister() {
+      this.$router.push("/register");
+    }
   }
 };
 </script>
@@ -98,5 +105,4 @@ export default {
     .btn
         height 50px
         width 100%
-    
 </style>
